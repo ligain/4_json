@@ -8,17 +8,17 @@ def load_data(filepath):
     return parsed_json
 
 
-def pretty_print_json(json_data, indent=4, ensure_ascii=False):
+def pretty_print_json(json_obj, indent=4, ensure_ascii=False):
     print(
         json.dumps(
-            json_data,
+            json_obj,
             indent=indent,
             ensure_ascii=ensure_ascii
         )
     )
 
 
-if __name__ == '__main__':
+def get_args():
     parser = argparse.ArgumentParser(
         description='Tool to prettify output of json files'
     )
@@ -28,10 +28,14 @@ if __name__ == '__main__':
         help='path to json file',
         required=True
     )
+    return parser.parse_args()
 
-    args = parser.parse_args()
 
-    parsed_json_file = load_data(args.filepath)
+if __name__ == '__main__':
 
-    pretty_print_json(parsed_json_file)
+    args = get_args()
+
+    parsed_json = load_data(args.filepath)
+
+    pretty_print_json(parsed_json)
 
